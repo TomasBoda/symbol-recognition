@@ -13,7 +13,7 @@ The GUI for this application is built upon the Java Spring framework (JFrame, JP
 <br>
 The upper part of the window is a square canvas used for drawing and displaying handwritten symbols. The bottom of the window serves as a toolbar with a mode switch, an action button and an input field used for assigning keys for the handwritten symbols and for outputing the estimations of the handwritten symbols.
 
-## Application Life Cycle
+## Application Lifecycle
 The application has three modes, in which it operates.
 
 ### Train mode
@@ -35,5 +35,6 @@ The math formula for calculating the distance between two matrices is as follows
 <br>
 <br>
 $||A - B|| = \sqrt{\sum_{i=1} \sum_{j=1} (a_{ij}-b_{ij})^2}$
+
 
 **Handwritten Symbol Recognition Using Matrix Distances** by [Tomáš Boďa](https://github.com/TomasBoda)
