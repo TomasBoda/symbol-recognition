@@ -2,7 +2,6 @@ package main;
 
 import canvas.Canvas;
 import logic.Handler;
-import matrix.Matrix;
 
 import javax.swing.*;
 import java.awt.*;

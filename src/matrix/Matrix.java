@@ -6,10 +6,6 @@ public class Matrix {
 
     public RGB[][] data;
 
-    public Matrix(RGB[][] data) {
-        this.data = data;
-    }
-
     public Matrix(int width, int height) {
         this.data = new RGB[height][width];
 

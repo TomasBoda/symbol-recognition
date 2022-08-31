@@ -35,6 +35,8 @@ public class Canvas {
             return;
         }
 
+        // draws the handwritten lines onto a canvas
+
         g.setColor(Color.WHITE);
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(35));
@@ -62,6 +64,7 @@ public class Canvas {
         this.showingMatrix = showingMatrix;
     }
 
+    // clears the canvas
     public void clear() {
         this.layerPoints.clear();
         this.strokePoints.clear();
