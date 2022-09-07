@@ -1,4 +1,4 @@
-package matrix;
+package components;
 
 import components.RGB;
 

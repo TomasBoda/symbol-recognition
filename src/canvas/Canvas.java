@@ -1,7 +1,7 @@
 package canvas;
 
 import logic.Handler;
-import matrix.Matrix;
+import components.Matrix;
 import main.Window;
 
 import java.awt.*;

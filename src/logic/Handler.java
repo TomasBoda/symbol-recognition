@@ -2,14 +2,11 @@ package logic;
 
 import components.RGB;
 import main.Window;
-import matrix.Matrix;
+import components.Matrix;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
