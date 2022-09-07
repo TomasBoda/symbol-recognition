@@ -26,6 +26,7 @@ public class Window extends JPanel implements ActionListener {
     public static Canvas canvas;
     public static Handler handler;
     private Input input;
+
     public Window() {
         frame = new JFrame("Handwritten Symbol Recognition - MODE: TRAIN");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,40 +54,33 @@ public class Window extends JPanel implements ActionListener {
         panel.setFocusable(true);
         panel.setBackground(Color.BLACK);
 
+        ActionListener action = e -> {
+            switch (handler.mode) {
+                case TRAIN:
+                    handler.train();
+                    break;
+                case ESTIMATE:
+                    handler.estimate();
+                    break;
+                case SHOW:
+                    handler.show();
+                    break;
+            }
+        };
+
         toolbar = new JPanel();
         toolbar.setLayout(new BorderLayout(0, 0));
 
         inputField = new JTextField();
         inputField.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         inputField.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
-        inputField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (handler.mode == Handler.MODE.TRAIN) {
-                    handler.train();
-                } else if (handler.mode == Handler.MODE.ESTIMATE) {
-                    handler.estimate();
-                } else {
-                    handler.show();
-                }
-            }
-        });
+
+        inputField.addActionListener(action);
 
         actionButton = new JButton("Train");
         actionButton.setFocusPainted(false);
         actionButton.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
-        actionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (handler.mode == Handler.MODE.TRAIN) {
-                    handler.train();
-                } else if (handler.mode == Handler.MODE.ESTIMATE) {
-                    handler.estimate();
-                } else {
-                    handler.show();
-                }
-            }
-        });
+        actionButton.addActionListener(action);
 
         modeButton = new JButton("Change mode");
         modeButton.setFocusPainted(false);
