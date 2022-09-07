@@ -4,9 +4,12 @@ import components.RGB;
 import main.Window;
 import components.Matrix;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -24,8 +27,45 @@ public class Handler {
     public Handler() {
         trainedData = new Hashtable<>();
         averagedData = new Hashtable<>();
+
+        loadDataSet();
     }
 
+    private void loadDataSet() {
+        String path = "./training-data";
+        File dir = new File(path);
+        File[] directoryListing = dir.listFiles();
+
+        if (directoryListing != null) {
+            System.out.println("Directory contains " + directoryListing.length + " files.");
+
+            for (File file : directoryListing) {
+                String filename = file.getName();
+                if (!filename.contains(".png")) continue;
+                String key = filename.split(".png")[0];
+
+                File imageFile = new File("./training-data/" + filename);
+                try {
+                    BufferedImage image = ImageIO.read(imageFile);
+                    Matrix matrix = getDigitMatrixFromImage(image);
+
+                    ArrayList<Matrix> matrices = trainedData.get(key);
+
+                    if (matrices == null) {
+                        matrices = new ArrayList<>();
+                        trainedData.put(key, matrices);
+                    }
+
+                    matrices.add(matrix);
+                } catch (IOException e) {
+                    System.out.println("Something went wrong...");
+                }
+
+            }
+        } else {
+            System.out.println("Directory does not exist...");
+        }
+    }
     public void changeMode() {
         if (mode == MODE.TRAIN) {
             Window.frame.setTitle("Handwritten Symbol Recognition - MODE: ESTIMATE");
@@ -218,6 +258,30 @@ public class Handler {
                 int blue = (rgb & 0xFF);
 
                 newDigit.data[j][i].setRGB(red, green, blue);
+            }
+        }
+
+        return newDigit;
+    }
+
+    public Matrix getDigitMatrixFromImage(BufferedImage img) {
+        JPanel panel = Window.panel;
+
+        int width = 600;
+        int height = 600;
+
+        Matrix newDigit = new Matrix(width, height);
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int rgb = img.getRGB(i, j);
+
+                int red = (rgb >> 16) & 0xFF;
+                int green = (rgb >> 8) & 0xFF;
+                int blue = (rgb & 0xFF);
+
+                // 255 - value for inverted colors
+                newDigit.data[j][i].setRGB(255 - red, 255 - green, 255 - blue);
             }
         }
 

@@ -39,7 +39,7 @@ public class Canvas {
 
         g.setColor(Color.WHITE);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(35));
+        g2.setStroke(new BasicStroke(25));
 
         for (int i = 0; i < layerPoints.size(); i++) {
             ArrayList<Point> layer = layerPoints.get(i);
