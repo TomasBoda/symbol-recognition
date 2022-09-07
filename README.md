@@ -46,9 +46,9 @@ $||A - B|| = \sqrt{\sum_{i=1} \sum_{j=1} (a_{ij}-b_{ij})^2}$
 The $a_{ij}$ and the $b_{ij}$ values are the specific pixels of the two matrices we are comparing. However, with RGB pixel values, we need some sort of metrics to compare these two values and tell how similar they are. Luckily, since we are only recognizing symbols, we are working only with **grayscale images** - canvas is black, handwritten symbols are white and the averaged data could be anywhere between 0-255 RGB values. Therefore, we only need to compare one of the red, green, blue values, since each pixel has these three values the same. So, the distance between two pixels is then calculated as `(pixel1.red - pixel2.red)^2`.
 
 ## Data Structures
-For storing the trained symbols, I opted for a simple **hashtable**, which feels like a natural and an ideal option for this task. The **keys** are the symbol **labels** and the **values** are `LinkedList` instances, where all the symbols under the given label are stored.
+For storing the trained symbols, I opted for a simple **hashtable**, which feels like a natural and an ideal option for this task. The **keys** are the symbol **labels** and the **values** are `ArrayList` instances, where all the symbols under the given label are stored.
 <br>
-After drawing a symbol and assigning a label to it, we check whether the label (key) is already present in the hashtable and if so, we add the new symbol to the end of the `LinkedList`. Otherwise, we create a new entry in the hashtable and store the symbol under the new key.
+After drawing a symbol and assigning a label to it, we check whether the label (key) is already present in the hashtable and if so, we add the new symbol to the end of the `ArrayList`. Otherwise, we create a new entry in the hashtable and store the symbol under the new key.
 <br>
 <br>
 After switching to the **Estimate Mode**, all the trained data is processed, recalculated and stored into a new hashtable with averaged symbol values. For each key in the new hashtable, a new symbol matrix is generated, with each pixel calculated as the sum of the trained symbol pixels divided by the number of the trained symbols for the given key. In this way, we create some sort of an **averaged symbol matrix** with the pixel values ranging from 0-255.
