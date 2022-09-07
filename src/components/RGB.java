@@ -27,4 +27,8 @@ public class RGB {
     public static RGB average(RGB rgb, int n) {
         return new RGB(rgb.red / n, rgb.green / n, rgb.red / n);
     }
+
+    public static void print(RGB rgb) {
+        System.out.println(rgb.red + " - " + rgb.green + " - " + rgb.blue);
+    }
 }

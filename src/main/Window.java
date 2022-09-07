@@ -59,6 +59,18 @@ public class Window extends JPanel implements ActionListener {
         inputField = new JTextField();
         inputField.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         inputField.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
+        inputField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (handler.mode == Handler.MODE.TRAIN) {
+                    handler.train();
+                } else if (handler.mode == Handler.MODE.ESTIMATE) {
+                    handler.estimate();
+                } else {
+                    handler.show();
+                }
+            }
+        });
 
         actionButton = new JButton("Train");
         actionButton.setFocusPainted(false);

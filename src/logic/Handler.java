@@ -4,9 +4,12 @@ import components.RGB;
 import main.Window;
 import matrix.Matrix;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -111,11 +114,8 @@ public class Handler {
 
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
-                    // Euclidean distance between two RGB values
-                    double colorDistance = Math.sqrt((drawnMatrix.data[i][j].red - matrix.data[i][j].red)^2 + (drawnMatrix.data[i][j].green - matrix.data[i][j].green)^2 + (drawnMatrix.data[i][j].blue - matrix.data[i][j].blue)^2);
-
-                    if (Double.isNaN(colorDistance)) continue;
-
+                    // since our images are grayscale, comparing just the red value will suffice
+                    double colorDistance = (matrix.data[i][j].red - drawnMatrix.data[i][j].red) * (matrix.data[i][j].red - drawnMatrix.data[i][j].red);
                     distance += colorDistance;
                 }
             }
